@@ -21,16 +21,14 @@ function ct_admin_template_server_path($file_path, $include = true, $options = a
     $my_plugin_dir = WP_PLUGIN_DIR . "/" . CT_WP_ADMIN_DIR . "/";
 
     if ( is_dir( $my_plugin_dir ) ) {
-
         $path_to_file = $my_plugin_dir . $file_path . '.php';
-
-        if ($include) {
-            include $path_to_file;
-        }
-
-        return $path_to_file;
     }
 
+    // Check if theme includes views template file (/themes/mytheme/ct-admin/). If yes, use it instead plugin view.
+
+    /*
+    $extension = '.php';
+    $name = basename($file_path, $extension);
 
     // view options
     $options = apply_filters('ct_admin_locate_template_options', $options, $name);
@@ -39,11 +37,16 @@ function ct_admin_template_server_path($file_path, $include = true, $options = a
     $path_to_file     = rtrim($include_dir_path, '/')."/$name.php";
 
     if (!is_readable($path_to_file)) {
-        $include_dir_path = __DIR__."/views";
+        // theme not includes views, use plugin directory
+        $include_dir_path =  $my_plugin_dir ."/views";
     }
 
     $include_dir_path = apply_filters('ct_admin_locate_template_path', $include_dir_path, $name);
     $path_to_file     = rtrim($include_dir_path, '/')."/$name.php";
+
+    var_dump($path_to_file);
+    */
+
 
     if ($include) {
         include $path_to_file;
