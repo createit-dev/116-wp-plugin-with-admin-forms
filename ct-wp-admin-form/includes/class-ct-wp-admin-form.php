@@ -10,6 +10,7 @@ class Ct_Admin_Form
     protected $views = array(
         'view0' => 'views/view0',
         'view1' => 'views/view1',
+        'view2' => 'views/view2',
         'alerts' => 'views/alerts',
         'not-found' => 'views/not-found'
     );
@@ -74,6 +75,16 @@ class Ct_Admin_Form
             esc_html__('Submenu', 'ct-admin'),
             'manage_options',
             $this->get_id() . '_view1',
+            array(&$this, 'load_view')
+        );
+
+
+        add_submenu_page(
+            $this->get_id(),
+            esc_html__('Submenu2', 'ct-admin'),
+            esc_html__('Submenu2', 'ct-admin'),
+            'manage_options',
+            $this->get_id() . '_view2',
             array(&$this, 'load_view')
         );
 
@@ -351,4 +362,40 @@ class Ct_Admin_Form
 
 
     }
+
+    private function view2_data()
+    {
+        $args = [];
+
+        $values = array(
+            '' => esc_html__('Select', 'ct-admin'),
+            'cs' => 'Čeština',
+            'de' => 'Deutsch',
+            'en' => 'English',
+            'es' => 'Español',
+            'fr' => 'Français',
+            'hr' => 'Hrvatski',
+            'hu' => 'Magyar',
+            'no' => 'Norwegian',
+            'it' => 'Italiano',
+            'nl' => 'Nederlands',
+            'pl' => 'Polski',
+            'pt' => 'Português',
+            'ro' => 'Română',
+            'ru' => 'Русский',
+            'sk' => 'Slovenčina',
+            'dk' => 'Danish',
+            'bg' => 'Bulgarian',
+            'sv' => 'Swedish'
+        );
+        $args['cookie_content_language2'] = $this->render_select('ct-admin-cookie', 'cookie_content_language2', $values);
+        $args['cookie_content2'] = $this->render_textarea('ct-admin-cookie', 'cookie_content2');
+        $args['cookie_popup_label_accept2'] = $this->render_input('ct-admin-cookie', 'cookie_popup_label_accept2');
+
+        $args['forgotten_automated_forget2'] = $this->render_checkbox('ct-admin-forgotten', 'forgotten_automated_forget2');
+
+
+        return $args;
+    }
+
 }
